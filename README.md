@@ -1,3 +1,27 @@
+# changes:
+```
+#DEFAULT_IP = "10.0.0.255"
+DEFAULT_IP = "127.0.0.1"
+
+
+class Publisher:
+
+    def send(self, obj):
+        #...
+        
+        
+        
+        #self.sock.send(msg)
+        try:
+            self.sock.send(msg)
+        except socket.error:
+            pass
+        finally:
+            self.sock.settimeout(0.2)
+```
+
+
+
 # UDPComms
 
 This is a simple library to enable communication between different processes (potentially on different machines) over a network using UDP. It's goals a simplicity and easy of understanding and reliability. It works for devices on the `10.0.0.X` subnet although this can easiliy be changed.
