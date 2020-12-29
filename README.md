@@ -9,7 +9,7 @@ class Publisher:
     def send(self, obj):
         #...
         
-        
+        #######   solve issue: self.udp_publisher.send() ConnectionRefusedError on second call
         
         #self.sock.send(msg)
         try:
