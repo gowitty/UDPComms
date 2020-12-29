@@ -26,7 +26,8 @@ timeout = socket.timeout
 
 MAX_SIZE = 65507
 
-DEFAULT_IP = "10.0.0.255"
+#DEFAULT_IP = "10.0.0.255"
+DEFAULT_IP = "127.0.0.1"
 
 class Publisher:
     def __init__(self, port, ip = DEFAULT_IP):
@@ -50,7 +51,13 @@ class Publisher:
         """ Publish a message. The obj can be any nesting of standard python types """
         msg = msgpack.dumps(obj, use_bin_type=False)
         assert len(msg) < MAX_SIZE, "Encoded message too big!"
-        self.sock.send(msg)
+        #self.sock.send(msg)
+        try:
+            self.sock.send(msg)
+        except socket.error:
+            pass
+        finally:
+            self.sock.settimeout(0.2)
 
     def __del__(self):
         self.sock.close()
